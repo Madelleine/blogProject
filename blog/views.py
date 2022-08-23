@@ -6,6 +6,10 @@ from .models import Post, Comment
 from .forms import PostForm, CommentForm
 
 
+def custom_page_not_found_view(request, exception):
+    return render(request, "errors/404.html", {})
+
+
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
